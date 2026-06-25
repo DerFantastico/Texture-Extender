@@ -97,7 +97,7 @@ namespace Texture_Extender
 
             SaveFileDialog sfd = new SaveFileDialog();
             sfd.Title = "Save Image";
-            sfd.Filter = "Image Files|*." + extension;
+            sfd.Filter = "Image Files|*" + extension;
 
             if(sfd.ShowDialog() == DialogResult.OK)
             {
@@ -122,12 +122,14 @@ namespace Texture_Extender
             Bitmap extended = new Bitmap(source.Width*w, source.Height*h);
 
             Graphics g = Graphics.FromImage(extended);
+            g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
+            g.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.Half;
 
             for(int i = 0; i < h; i++)
             {
                 for(int j = 0; j < w; j++)
                 {
-                    g.DrawImage(source, i*source.Width, j*source.Height);
+                    g.DrawImage(source, j*source.Width, i*source.Height);
                 }
             }
 
