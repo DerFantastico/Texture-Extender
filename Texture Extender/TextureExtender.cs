@@ -129,7 +129,12 @@ namespace Texture_Extender
             {
                 for(int j = 0; j < w; j++)
                 {
-                    g.DrawImage(source, j*source.Width, i*source.Height);
+                    g.DrawImage(
+                    source,
+                    new Rectangle(j * source.Width, i * source.Height, source.Width, source.Height),
+                    0, 0, source.Width, source.Height,
+                    GraphicsUnit.Pixel
+                    );
                 }
             }
 
